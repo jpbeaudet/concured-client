@@ -1,13 +1,15 @@
 extends ../layouts/default
 block content
   body
-
    center
     .panel.panel-default
       .panel-heading
         h3.panel-title Concured
-
+        .container
+         span#test
+         
     // jQuery (necessary for Bootstrap's JavaScript plugins)
     script(src='/js/jquery.min.js')
     // Include all compiled plugins (below), or include individual files as needed
     script(src='/js/bootstrap.min.js')
+    script(src='concured_client.js')
