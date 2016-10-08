@@ -1,0 +1,22 @@
+header
+    nav.navbar.navbar-default.navbar-static-top
+     .table-responsive
+       table.table
+         tr
+           td 
+            h2 Concured Client
+
+           td
+            right
+            .container-fluid(style='padding-top:4%;font-size:1.4em;')
+             if isAlreadyLoggedin
+               a(href='/logout') Logout
+               &nbsp&nbsp&nbsp&nbsp
+             else
+               a(href='login') Login
+               &nbsp&nbsp
+               a(href='register') Register
+            .container-fluid
+             if username
+              b Username: #{username}
+
