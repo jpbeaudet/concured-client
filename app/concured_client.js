@@ -14,9 +14,13 @@
 	// Test Concured api connection
 	var _test = (function test(){
 		if ($('#test').length) {
+			console.log("started")
 		$.getJSON( "http://localhost:3000/api", function( data ) {
-			var ok = test_list(data, "alert alert-success", "testdiv", "body")
-			setTimeout(function(){ return test();}, refresh)
+			var _cb = function(){
+				console.log("_cb")
+				setTimeout(function(){ return test();}, refresh)
+			}
+			var ok = test_list(data, "alert alert-success", "testdiv", "body", _cb)
 		});
 		}
 	})();

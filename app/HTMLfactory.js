@@ -8,7 +8,7 @@
 // =====================================================
 
 // Test list component
-function test_list(data, css_class, _id,  target){
+function test_list(data, css_class, _id,  target, _cb){
 	$("#"+_id).remove()
 	var items = [];
 	$.each( data, function( key, val ) {
@@ -19,5 +19,5 @@ function test_list(data, css_class, _id,  target){
 		"id": _id,
 		html: items.join( "" )
 	}).appendTo(target);
-	return true
+	return _cb()
 }
