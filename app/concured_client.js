@@ -1,20 +1,24 @@
+// Author: Jean-Philippe Beaudet @ S3R3NITY Technology
+// 
+// Concured Client side
+// Version : 2.0.1
+// =====================================================
+
+// SELECTORS
+// =====================================================
 
 (function($){
-	
-	// TODO : Here will go all jquery stuff
+	// set timeout cycle in miliseconds
+	var refresh = 10000
 	
 	// Test Concured api connection
-	if ($('#test').length) {
-	$.getJSON( "http://localhost:3000/api", function( data ) {
-	var items = [];
-	$.each( data, function( key, val ) {
-		items.push( "<li id='" + key + "'>" + val + "</li>" );
-	});
- 
-	$( "<ul/>", {
-		"class": "my-new-list",
-		html: items.join( "" )
-	}).appendTo( "body" );
-	});
-	}
+	var _test = (function test(){
+		if ($('#test').length) {
+		$.getJSON( "http://localhost:3000/api", function( data ) {
+			var ok = test_list(data, "alert alert-success", "testdiv", "body")
+			setTimeout(function(){ return test();}, refresh)
+		});
+		}
+	})();
+	
 })(jQuery);
