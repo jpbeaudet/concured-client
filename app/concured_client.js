@@ -32,7 +32,7 @@
 				}else{
 					_locales.test = MD5.hex(JSON.stringify(data))
 					console.log("generate")
-					var ok = test_list(data, "alert alert-success", "testdiv", "body", _cb)
+					var ok = test_list(data, "alert alert-success", "testdiv", "#test", _cb)
 				}
 			}else{
 				//print error to console for debugging
