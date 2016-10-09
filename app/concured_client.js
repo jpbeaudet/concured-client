@@ -9,6 +9,7 @@
 
 (function($){
 	// set locales for optimisation
+	var MD5 = new Hashes.MD5;
 	var _locales = {
 	"test": {}
 	}
@@ -26,10 +27,10 @@
 					console.log("_cb")
 					setTimeout(function(){ return test();}, refresh)
 				}
-				if ( JSON.stringify(_locales.test) ==  JSON.stringify(data)){
+				if ( _locales.test ==  MD5.hex(JSON.stringify(data))){
 					return _cb()
 				}else{
-					_locales.test = data
+					_locales.test = MD5.hex(JSON.stringify(data))
 					console.log("generate")
 					var ok = test_list(data, "alert alert-success", "testdiv", "body", _cb)
 				}
@@ -38,7 +39,6 @@
 				console.log(JSON.stringify(data))
 			}
 		});
-
 		}
 	})();
 	
