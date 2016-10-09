@@ -21,18 +21,24 @@
 		if ($('#test').length) {
 			console.log("started")
 		$.getJSON( "http://localhost:3000/api", function( data ) {
-			var _cb = function(){
-				console.log("_cb")
-				setTimeout(function(){ return test();}, refresh)
-			}
-			if ( JSON.stringify(_locales.test) ==  JSON.stringify(data)){
-				return _cb()
+			if (data.success){
+				var _cb = function(){
+					console.log("_cb")
+					setTimeout(function(){ return test();}, refresh)
+				}
+				if ( JSON.stringify(_locales.test) ==  JSON.stringify(data)){
+					return _cb()
+				}else{
+					_locales.test = data
+					console.log("generate")
+					var ok = test_list(data, "alert alert-success", "testdiv", "body", _cb)
+				}
 			}else{
-				_locales.test = data
-				console.log("generate")
-				var ok = test_list(data, "alert alert-success", "testdiv", "body", _cb)
+				//print error to console for debugging
+				console.log(JSON.stringify(data))
 			}
 		});
+
 		}
 	})();
 	
