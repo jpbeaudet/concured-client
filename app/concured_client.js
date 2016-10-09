@@ -8,6 +8,11 @@
 // =====================================================
 
 (function($){
+	// set locales for optimisation
+	var _locales = {
+	"test": {}
+	}
+	
 	// set timeout cycle in miliseconds
 	var refresh = 10000
 	
@@ -20,7 +25,13 @@
 				console.log("_cb")
 				setTimeout(function(){ return test();}, refresh)
 			}
-			var ok = test_list(data, "alert alert-success", "testdiv", "body", _cb)
+			if ( JSON.stringify(_locales.test) ==  JSON.stringify(data)){
+				return _cb()
+			}else{
+				_locales.test = data
+				console.log("generate")
+				var ok = test_list(data, "alert alert-success", "testdiv", "body", _cb)
+			}
 		});
 		}
 	})();
