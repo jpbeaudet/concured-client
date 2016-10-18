@@ -105,7 +105,6 @@
 							if(topics.success){
 						       console.log("generated 5 topics: "+JSON.stringify(topics.TopTopics)+" id: "+topics.order)
 								items.push({"top_topics": topics.TopTopics})
-								
 								var generate = Dashboard_Topics(topics.TopTopics, topics.order, _cb)
 							}
 						});

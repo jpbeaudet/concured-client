@@ -48,6 +48,7 @@ function sites_list(data, css_class, _id,  target, _cb){
 // 5 topics for dashboard
 function Dashboard_Topics(data, _id, _cb){
 	$("#dashboard_topics").remove()
+	if (data.length >0){
 	console.log("data is: "+JSON.stringify(data)+" id is: "+_id)
 		var markupS = ['<div class="onerow site" id="'+_id+'" >']
 		for(var x=0; x < data.length; x++){
@@ -64,6 +65,18 @@ function Dashboard_Topics(data, _id, _cb){
 		console.log("markup is: "+html)
 		//$(markupS).hide().appendTo('.onerow.site').fadeIn();
 		$(html).appendTo('#dashboard_topics_wrapper')
-
+	}else{
+		var markupS = ['<div class="onerow site" id="'+_id+'" >']
+		markupS.push('<div class="col2">')
+		markupS.push('<h3>Searching for topics</h3><ul class="results">')
+			markupS.push('<li><img src="img/twitter.png" alt=""/><span class="twitter">?</span></li>')
+			markupS.push('<li><img src="img/facebook.png" alt=""/><span class="facebook">?</span></li>')
+			markupS.push('<li><img src="img/linkedin.png" alt=""/><span class="linkedin">?</span></li>')
+			markupS.push('<li><img src="img/googleplus.png" alt=""/><span class="gplus">?</span></li></ul>')
+		var html = markupS.join('')
+		console.log("markup is: "+html)
+		//$(markupS).hide().appendTo('.onerow.site').fadeIn();
+		$(html).appendTo('#dashboard_topics_wrapper')
+		}
 	return _cb()
 }
