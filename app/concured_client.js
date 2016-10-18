@@ -75,7 +75,7 @@
 			console.log("started")
 		$.getJSON( "http://localhost:3000/api", function( data ) {
 			if (data.success){
-				var items=[]
+
 				var urls =[]
 				var end =0
 				var _cb = function(){
@@ -97,15 +97,17 @@
 						 urls.push(data.projects[0].competitors_sites[i])
 					}
 					console.log("generate top 5 topics for "+JSON.stringify(urls))
+					
 					// build a fresh top 5 topics list
 					for(var x=0; x < urls.length; x++){
+						var generated = span_topics_rows(x)
 						var url = urls[x].replace(/\//g, '_');
 						console.log("generate 5 topics for "+JSON.stringify(url))
-						$.getJSON( "http://localhost:3000/api/audit/TopTopicsPerSite/"+ url+"?number=5", function(topics ) {
+						
+						$.getJSON( "http://localhost:3000/api/audit/TopTopicsPerSite/"+ url+"?number=5&order="+x, function(topics ) {
 							if(topics.success){
-						       console.log("generated 5 topics: "+JSON.stringify(topics.TopTopics)+" id: "+topics.order)
-								items.push({"top_topics": topics.TopTopics})
-								var generate = Dashboard_Topics(topics.TopTopics, topics.order, _cb)
+						       console.log("generated 5 topics: "+JSON.stringify(topics.TopTopics)+" id: "+topics.id+" order: "+ topics.order)
+								var generate = Dashboard_Topics(topics.TopTopics, topics.id, topics.order, _cb)
 							}
 						});
 					}

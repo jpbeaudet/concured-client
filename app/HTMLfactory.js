@@ -45,9 +45,20 @@ function sites_list(data, css_class, _id,  target, _cb){
 	return _cb()
 }
 
+// span the topics rows corresponding to the number of sites
+function span_topics_rows(order){
+	if (document.getElementById("s"+String(order)) == null){
+		var markupS = ['<div id="s'+order+'" >']
+		var html = markupS.join('')
+		console.log("markup is: "+html)
+		$(html).appendTo("#dashboard_topics_wrapper")
+		
+	}
+}
+
 // 5 topics for dashboard
-function Dashboard_Topics(data, _id, _cb){
-	$("#dashboard_topics").remove()
+function Dashboard_Topics(data, _id, order, _cb){
+	$("#"+order).remove()
 	if (data.length >0){
 	console.log("data is: "+JSON.stringify(data)+" id is: "+_id)
 		var markupS = ['<div class="onerow site" id="'+_id+'" >']
@@ -62,9 +73,8 @@ function Dashboard_Topics(data, _id, _cb){
 		}
 		markupS.push('</div>')
 		var html = markupS.join('')
-		console.log("markup is: "+html)
-		//$(markupS).hide().appendTo('.onerow.site').fadeIn();
-		$(html).appendTo('#dashboard_topics_wrapper')
+		var target = document.getElementById("s"+String(order))
+		target.innerHTML= html
 	}else{
 		var markupS = ['<div class="onerow site" id="'+_id+'" >']
 		markupS.push('<div class="col2">')
@@ -74,9 +84,8 @@ function Dashboard_Topics(data, _id, _cb){
 			markupS.push('<li><img src="img/linkedin.png" alt=""/><span class="linkedin">?</span></li>')
 			markupS.push('<li><img src="img/googleplus.png" alt=""/><span class="gplus">?</span></li></ul>')
 		var html = markupS.join('')
-		console.log("markup is: "+html)
-		//$(markupS).hide().appendTo('.onerow.site').fadeIn();
-		$(html).appendTo('#dashboard_topics_wrapper')
+		var target = document.getElementById("s"+String(order))
+		target.innerHTML= html
 		}
 	return _cb()
 }
