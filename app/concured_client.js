@@ -125,13 +125,18 @@
 		if(overview){
 		$('#sitediv').fadeOut( "fast", function() {
 			$('#dashboard_topics_wrapper').css("width","90%")
+			$('#overview_header').css("visibility","visible")
 		overview=false
 		});
 	}else{
 		$('#sitediv').fadeIn( "fast", function() {
-			$('#dashboard__wrapper').css("width","75%")
+			$('#dashboard_topics_wrapper').css("width","75%")
+			$('#overview_header').css("visibility","hidden")
 		overview=true
 		});
 	}
 	});
+		$('#overview_header').click(function(){
+			$('#overview').click()
+		});
 })(jQuery);
