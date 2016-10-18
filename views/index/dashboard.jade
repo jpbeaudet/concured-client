@@ -1,0 +1,29 @@
+extends ../layouts/default
+block content
+  body
+    .mainContainer
+      .onepcssgrid-1200
+        .onerow.nopad
+          .col2.nomarg.sideNavContainer(style="width:25%;")
+            .sideNav
+              h3
+                a#overview(href='#') Overview
+              h4 Insights on:
+              .container#sitediv(style="color:white;font-size:1.2em;")
+               span#sites
+
+          .col10.nomarg.content.audit.last#dashboard_topics_wrapper(style="width:75%;")
+            .intro
+              h1 Top 5 Topics By Websites
+              p
+                | For a more detailed view of the top topics' trends, you can select your site of interest in the sidebar.
+            span#dashboard_topics
+
+    // jQuery (necessary for Bootstrap's JavaScript plugins)
+    script(src='/js/jquery.min.js')
+    // Include all compiled plugins (below), or include individual files as needed
+    script(src='/js/bootstrap.min.js')
+    script(src='hashes.js')
+    script(src='concured_client.js')
+    script(src='HTMLfactory.js')
+    script(src='/js/jqcloud-1.0.4.min.js')

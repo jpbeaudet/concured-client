@@ -6,21 +6,39 @@
 
 
 var mongoose = require('mongoose');
+exports.home = function (req, res) {
+	
+    var data = {
+        title: "Concured - Home"
+    };
+    res.render('index/home', data);
 
+};
 
-exports.index = function (req, res) {
-	var username = "Not logged in";
-	var isAlreadyLoggedin = false;
-	// if the user is logged in 
-    if(req.user) {
-    	username = req.user.username;
-    	isAlreadyLoggedin = true;
+exports.dashboard = function (req, res) {
+	// if the user is not logged in 
+    if(!req.user) {
+    	res.redirect('/')
     }
     var data = {
-        title: "Concured ",
-        username: username,
-        isAlreadyLoggedin:isAlreadyLoggedin
+        title: "Concured - Dashboard",
+        username: req.user.username
     };
-    res.render('index/index', data);
+    res.render('index/dashboard', data);
+
+};
+
+
+exports.audit = function (req, res) {
+	// if the user is not logged in 
+    if(!req.user) {
+    	res.redirect('/')
+    }
+    var data = {
+        title: "Concured - Audit",
+        audit: true,
+        username: req.user.username
+    };
+    res.render('index/audit', data);
 
 };

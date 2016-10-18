@@ -14,13 +14,12 @@ module.exports = function (app) {
 	
 	//Main routes
 	///////////////////////////
-	app.get('/', index.index);
+	app.get('/', index.home);
+	app.get('/dashboard', index.dashboard);
+	app.get('/audit', index.audit);
 
 	// auth routes
 	/////////////////////////////
-	app.get('/login', function(req, res) {
-	    res.render('index/login', {title:" Login" });
-	});
 	app.get('/register', function(req, res) {
 	    res.render('index/register', {title:" Register" });
 	});
@@ -35,7 +34,7 @@ module.exports = function (app) {
                if (err) {
                     return next(err);
                 }
-				res.redirect('/'); 
+				res.redirect('/dashboard'); 
            });
         });
    });
@@ -46,7 +45,7 @@ module.exports = function (app) {
 	        if (err) {
 	            return next(err);
 	        }
-	        res.redirect('/');
+	        res.redirect('/dashboard');
 	    });
 	});
 
