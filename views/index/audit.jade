@@ -12,106 +12,30 @@ block content
               .container#sitediv(style="color:white;font-size:1.2em;")
                span#sites
 
-          .col10.nomarg.content.last(style="width:75%;")
+          .col10.nomarg.content.last#dashboard_topics_wrapper(style="width:75%;")
             article.overview
               .onerow
                 .col3
-                  img(src='img/reuters_grey.png', alt='')
-                  h3=target
-                .col1  
-                .col6.tableContents
-                  table(cellspacing='0', cellpadding='0', border='0', width='100%')
-                    tr
-                      th Rank
-                      th.middle Top Topics
-                      th cScore
-                    tr
-                      td
-                        a(href='#') 1
-                      td.middle
-                        a(href='#') Trump skirts obligation
-                      td
-                        a(href='#') 205
-                    tr
-                      td
-                        a(href='#') 2
-                      td.middle
-                        a(href='#') Routes commercialzing technology
-                      td
-                        a(href='#') 210.5
-                    tr.selected
-                      td
-                        a(href='#') 3
-                      td.middle
-                        a(href='#') Reserve raise rates
-                      td
-                        a(href='#') 242
-                    tr
-                      td
-                        a(href='#') 4
-                      td.middle
-                        a(href='#') Clients pursue opportunities
-                      td
-                        a(href='#') 272
-                    tr
-                      td
-                        a(href='#') 5
-                      td.middle
-                        a(href='#') Reuters expanded partnership
-                      td
-                        a(href='#') 274
-                    tr
-                      td
-                        a(href='#') 6
-                      td.middle
-                        a(href='#') Authors evaluate studies
-                      td
-                        a(href='#') 277
-                    tr
-                      td
-                        a(href='#') 7
-                      td.middle
-                        a(href='#') Oil extended losses
-                      td
-                        a(href='#') 284.5
-                    tr
-                      td
-                        a(href='#') 8
-                      td.middle
-                        a(href='#') Law prohibits sales
-                      td
-                        a(href='#') 286
-                    tr
-                      td
-                        a(href='#') 9
-                      td.middle
-                        a(href='#') Mobile introduced plans
-                      td
-                        a(href='#') 292.5
-                    tr
-                      td
-                        a(href='#') 10
-                      td.middle
-                        a(href='#') Candidate becomes nominee
-                      td
-                        a(href='#') 294.5
+                  h4#target=target
+                .col1
+                .col6.tableContents#audit_topics
                   p Select a topic from the list above to generate insights
             article
               .onerow
                 .col12
-                  h1 Reserve raise rates
-              .onerow
+                  h1#selected_topic Select a topic
+              .onerow#details
                 .col3.scores
                   .cScore
                     img(src='img/cScore.png', alt='')
                     div
                       h4 Today's cscore
-                      h5 242
+                      h5#today_score ?
                   .rank
                     img(src='img/rank.png', alt='')
                     div
                       h4 Today's rank
-                      h5 3
+                      h5#today_rank ?
                 .col6.wordCloudContainer
                   ul.hidden.cloudItems
                     li(data-weight='10') Fed 

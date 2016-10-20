@@ -52,7 +52,7 @@ function test_list(data, css_class, _id, target, _cb){
 	$("#"+_id).remove()
 	var items = [];
 	$.each( data, function( key, val ) {
-		items.push( "<li id='" + key + "'>" + val + "</li>" );
+		items.push( "<li id=''>" + key +" : " + val + "</li>" );
 	});
 	$( "<ul/>", {
 		"class": css_class,
@@ -123,5 +123,53 @@ function Dashboard_Topics(data, _id, order, _cb){
 		target.innerHTML= html
 		update()
 		}
+	return _cb()
+}
+// 10 topics for audit
+function Audit_Topics(data, _id, target, _cb){
+	$("#"+_id).remove()
+	if (data.length >0){
+	console.log("audit topics data is: "+JSON.stringify(data)+" id is: "+_id)
+
+		//var markupS = ['<div class="col6 tableContents" id="'+_id+'" >']
+		var markupS = []
+		markupS.push('<table cellspacing="0" cellpadding="0" border="0" width="100%" id="'+_id+'" >')
+		markupS.push('<tr><th>Rank</th><th class="middle">Top Topics</th><th>cScore</th></tr>')
+		for(var x=0; x < data.length; x++){
+			markupS.push('<tr><td>'+data[x].rank+'</td><td class="middle" id="topic"><a href="#" name="'+data[x].rank+'" id="'+data[x].topic+'">'+data[x].topic+'</a></td><td>'+data[x].cscore+'</td></tr>')
+		}
+		markupS.push('</table>')
+		var html = markupS.join('')
+		$(html).appendTo(target)
+		update()
+	}else{
+
+		//var markupS = ['<div class="col6 tableContents" id="'+_id+'" >']
+		var markupS = []
+		markupS.push('<table cellspacing="0" cellpadding="0" border="0" width="100%" id="'+_id+'" >')
+		markupS.push('<tr><th>Rank</th><th class="middle">Top Topics</th><th>cScore</th></tr>')
+		markupS.push('<tr><th> ? </th><th class="middle"> ? </th><th> ? </th></tr>')
+		markupS.push('</table>')
+		var html = markupS.join('')
+		$(html).appendTo(target)
+		update()
+		}
+	return _cb()
+}
+// selected topic details population
+function Audit_Topics_Related_Concepts(data, _id, target, _cb){
+	//$("#"+_id).remove()
+	var items = [];
+
+	items.push( "<div class='col6 wordCloudContainer' ><ul class='hidden cloudItems'>" );
+	for (var i = 0; i < data.length; i++) { 
+		items.push( "<li id='related_concepts data-weight='"+i+"'>"+data[i]+"</li>" );
+	};
+	items.push('</ul><div id="wordCloud" style="width: 530px; height: 220px;" class="jqcloud"></div>')
+	items.push( "</div>" );
+	var html = items.join('')
+	console.log("markup is: "+html)
+	$(html).appendTo(target)
+	update()
 	return _cb()
 }
