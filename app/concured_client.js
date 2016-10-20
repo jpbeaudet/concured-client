@@ -52,6 +52,15 @@
 			if (data.success){
 				var _cb = function(){
 					console.log("_cb")
+					// Expose the new href element related to sites
+					$('a').click(function(){
+					if( $(this).parent().attr('id')== 'site'){
+						var element= $(this)
+						var target = element.attr('id')
+						console.log("target= "+target)
+						window.location.href = '/audit?target='+target
+					}
+					});
 					setTimeout(function(){ return sites();}, refresh)
 				}
 				if ( _locales.sites ==  MD5.hex(JSON.stringify(data))){
@@ -96,7 +105,7 @@
 					for( var i=0; i < data.projects[0].competitors_sites.length; i++){
 						 urls.push(data.projects[0].competitors_sites[i])
 					}
-					console.log("generate top 5 topics for "+JSON.stringify(urls))
+					//console.log("generate top 5 topics for "+JSON.stringify(urls))
 					
 					// build a fresh top 5 topics list
 					for(var x=0; x < urls.length; x++){
@@ -106,7 +115,7 @@
 						
 						$.getJSON( "http://localhost:3000/api/audit/TopTopicsPerSite/"+ url+"?number=5&order="+x, function(topics ) {
 							if(topics.success){
-						       console.log("generated 5 topics: "+JSON.stringify(topics.TopTopics)+" id: "+topics.id+" order: "+ topics.order)
+						       //console.log("generated 5 topics: "+JSON.stringify(topics.TopTopics)+" id: "+topics.id+" order: "+ topics.order)
 								var generate = Dashboard_Topics(topics.TopTopics, topics.id, topics.order, _cb)
 							}
 						});
@@ -140,5 +149,20 @@
 	});
 		$('#overview_header').click(function(){
 			$('#overview').click()
+		});
+		$('#audit_menu').click(function(){
+			var element= $('#sites').children().children().children()
+			var target = element.attr('id')
+			console.log("target= "+target)
+			window.location.href = '/audit?target='+target
+		});
+		$('#site').click(function(){
+			console.log(" a href parent id = "+$(this).children().attr('id'))
+			//if( $(this).parent().attr('id')== 'site'){
+			var element= $(this)
+			var target = element.attr('id')
+			console.log("target= "+target)
+			//window.location.href = '/audit?target='+target
+			//}
 		});
 })(jQuery);

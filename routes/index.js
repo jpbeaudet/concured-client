@@ -34,9 +34,11 @@ exports.audit = function (req, res) {
     if(!req.user) {
     	res.redirect('/')
     }
+    var target = req.query.target || "nothing"
     var data = {
         title: "Concured - Audit",
         audit: true,
+        target: target,
         username: req.user.username
     };
     res.render('index/audit', data);

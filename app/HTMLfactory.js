@@ -10,6 +10,10 @@ function clean_url(url){
 	url = url.replace(".com","").replace(".ca","")
 	return url
 }
+function url2param(url){
+	return url.replace(/\//g, '_');
+}
+
 function pretty_number(num, digits) {
     var units = ['k', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y'],
         decimal;
@@ -24,12 +28,27 @@ function pretty_number(num, digits) {
 
     return num;
 }
+ $.fn.update = function(){
+    var newElements = $(this.selector),i;    
+    for(i=0;i<newElements.length;i++){
+      this[i] = newElements[i];
+    }
+    for(;i<this.length;i++){
+      this[i] = undefined;
+    }
+    this.length = newElements.length;
+    return this;
+  };
+function update(){
+	var $this = $('body');
+	$this.update();
+}
 
 // COMPONENTS
 // =====================================================
 
 // Test list component
-function test_list(data, css_class, _id,  target, _cb){
+function test_list(data, css_class, _id, target, _cb){
 	$("#"+_id).remove()
 	var items = [];
 	$.each( data, function( key, val ) {
@@ -47,15 +66,16 @@ function test_list(data, css_class, _id,  target, _cb){
 function sites_list(data, css_class, _id,  target, _cb){
 	$("#"+_id).remove()
 	var items = [];
-		items.push( "<li id='client-site'><a href='#'>" + clean_url(data.client_site) + "</a></li>" );
+		items.push( "<li id='site'><a href='#' id='"+url2param(data.client_site)+"'>" + clean_url(data.client_site) + "</a></li>" );
 	for (var i = 0; i < data.competitors_sites.length; i++) { 
-		items.push( "<li id='competitor" + i + "'><a href='#'>" + clean_url(data.competitors_sites[i]) + "</a></li>" );
+		items.push( "<li id='site'><a href='#' id='"+url2param(data.competitors_sites[i])+"'>" + clean_url(data.competitors_sites[i]) + "</a></li>" );
 	};
 	$( "<ul/>", {
 		"id": _id,
 		"class": css_class,
 		html: items.join( "" )
 	}).appendTo(target);
+	update()
 	return _cb()
 }
 
@@ -64,9 +84,9 @@ function span_topics_rows(order){
 	if (document.getElementById("s"+String(order)) == null){
 		var markupS = ['<div id="s'+order+'" >']
 		var html = markupS.join('')
-		console.log("markup is: "+html)
+		//console.log("markup is: "+html)
 		$(html).appendTo("#dashboard_topics_wrapper")
-		
+		update()
 	}
 }
 
@@ -89,6 +109,7 @@ function Dashboard_Topics(data, _id, order, _cb){
 		var html = markupS.join('')
 		var target = document.getElementById("s"+String(order))
 		target.innerHTML= html
+		update()
 	}else{
 		var markupS = ['<div class="onerow site" id="'+_id+'" >']
 		markupS.push('<div class="col2">')
@@ -100,6 +121,7 @@ function Dashboard_Topics(data, _id, order, _cb){
 		var html = markupS.join('')
 		var target = document.getElementById("s"+String(order))
 		target.innerHTML= html
+		update()
 		}
 	return _cb()
 }
