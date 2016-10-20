@@ -4,33 +4,15 @@ block content
     .mainContainer
       .onepcssgrid-1200
         .onerow.nopad
-          .col2.sideNavContainer
-            .sideNav
+          .col2.nomarg.sideNavContainer(style="width:25%;")
+            .sideNav#sitediv
               h3
-                a(href='#') Overview
-
-
+                a#overview(href='#') Overview
               h4 Insights on:
-              ul
-                li
-                  a.selected(href='#')
-                    img(src='img/reuters.png', alt='')
-                li
-                  a(href='#')
-                    img(src='img/bloomberg.png', alt='')
-                li
-                  a(href='#')
-                    img(src='img/cnbc.png', alt='')
-                li
-                  a(href='#')
-                    img(src='img/guardian.png', alt='')
-                li
-                  a(href='#')
-                    img(src='img/wall_street.png', alt='')
-                li
-                  a(href='#')
-                    img(src='img/yahoo.png', alt='')
-          .col10.nomarg.content.last
+              .container#sitediv(style="color:white;font-size:1.2em;")
+               span#sites
+
+          .col10.nomarg.content.last(style="width:75%;")
             article.overview
               .onerow
                 .col3
