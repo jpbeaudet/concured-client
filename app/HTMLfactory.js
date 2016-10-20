@@ -10,17 +10,19 @@ function clean_url(url){
 	url = url.replace(".com","").replace(".ca","")
 	return url
 }
-function pretty_number(num) {
-     if (num >= 1000000000) {
-        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
-     }
-     if (num >= 1000000) {
-        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
-     }
-     if (num >= 1000) {
-        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
-     }
-     return num;
+function pretty_number(num, digits) {
+    var units = ['k', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y'],
+        decimal;
+
+    for(var i=units.length-1; i>=0; i--) {
+        decimal = Math.pow(1000, i+1);
+
+        if(num <= -decimal || num >= decimal) {
+            return +(num / decimal).toFixed(digits) + units[i];
+        }
+    }
+
+    return num;
 }
 
 // COMPONENTS
@@ -77,10 +79,10 @@ function Dashboard_Topics(data, _id, order, _cb){
 		for(var x=0; x < data.length; x++){
 			markupS.push('<div class="col2">')
 			markupS.push('<h3> #'+String((x+1))+" "+data[x].topic+'</h3><ul class="results">')
-			markupS.push('<li><img src="img/twitter.png" alt=""/><span class="twitter">'+pretty_number(data[x].twitter_count)+'</span></li>')
-			markupS.push('<li><img src="img/facebook.png" alt=""/><span class="facebook">'+pretty_number(data[x].facebook)+'</span></li>')
-			markupS.push('<li><img src="img/linkedin.png" alt=""/><span class="linkedin">'+pretty_number(data[x].linked_in)+'</span></li>')
-			markupS.push('<li><img src="img/googleplus.png" alt=""/><span class="gplus">'+pretty_number(data[x].google_plus)+'</span></li>')
+			markupS.push('<li><img src="img/twitter.png" alt=""/><span class="twitter">'+pretty_number(data[x].twitter_count, 1)+'</span></li>')
+			markupS.push('<li><img src="img/facebook.png" alt=""/><span class="facebook">'+pretty_number(data[x].facebook,1)+'</span></li>')
+			markupS.push('<li><img src="img/linkedin.png" alt=""/><span class="linkedin">'+pretty_number(data[x].linked_in,1)+'</span></li>')
+			markupS.push('<li><img src="img/googleplus.png" alt=""/><span class="gplus">'+pretty_number(data[x].google_plus,1)+'</span></li>')
 			markupS.push('</ul></div>')
 		}
 		markupS.push('</div>')
