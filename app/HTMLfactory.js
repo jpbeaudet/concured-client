@@ -156,20 +156,4 @@ function Audit_Topics(data, _id, target, _cb){
 		}
 	return _cb()
 }
-// selected topic details population
-function Audit_Topics_Related_Concepts(data, _id, target, _cb){
-	//$("#"+_id).remove()
-	var items = [];
 
-	items.push( "<div class='col6 wordCloudContainer' ><ul class='hidden cloudItems'>" );
-	for (var i = 0; i < data.length; i++) { 
-		items.push( "<li id='related_concepts data-weight='"+i+"'>"+data[i]+"</li>" );
-	};
-	items.push('</ul><div id="wordCloud" style="width: 530px; height: 220px;" class="jqcloud"></div>')
-	items.push( "</div>" );
-	var html = items.join('')
-	console.log("markup is: "+html)
-	$(html).appendTo(target)
-	update()
-	return _cb()
-}

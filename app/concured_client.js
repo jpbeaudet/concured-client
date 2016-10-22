@@ -154,6 +154,7 @@
 						console.log("cscore= "+JSON.stringify(cscore))
 						$('#selected_topic').text(target)
 						if ( _locales.audit_topics_details !=  MD5.hex(JSON.stringify(target))){
+							$("#wordCloud").text("")
 						var fetch = audit_topics_details (target, index)
 						_locales.audit_topics_details = MD5.hex(JSON.stringify(target))
 						}else{
@@ -184,16 +185,25 @@
 			// Finally populate selected topic data
 			$.getJSON( "http://localhost:3000/api/audit/TopicDataPerName/"+ target, function( topic ) {
 				if(topic.success){
+				
 				var _cb = function(){
 					console.log("topic details _cb")
 				}
 				console.log("topic data returned: " + JSON.stringify(topic))
-				$('#today_score').text(topic.topic.cscore.CSCORE)
+				$('#today_score').text(topic.topic.cscore.CSCORE) || 0
 				$('#today_rank').text(index)
+				$('#source_content').text(topic.topic.sentences_with_these_words[0])
 				var data=[]
 				data = topic.topic.subj_concepts.concat(topic.topic.obj_concepts)
 				console.log("topic details data: "+data)
-				//Audit_Topics_Related_Concepts(data, 'related_concepts_list', '#details', _cb)
+				var word_array = [],
+				wordItems = data;
+				for(var x=0; x < data.length; x++){
+				var word = data[x].replace(/ /g,''),
+				weight = x;
+				word_array.push({'text': word, 'weight': weight});
+				};
+				$("#wordCloud").jQCloud(word_array); 
 				}
 			
 			});
