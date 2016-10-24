@@ -6,7 +6,7 @@
 
 var Config = {
     node_web_server_host: "localhost",
-    node_web_server_port: 8080,
+    node_web_server_port: 4000,
     mongodb_database: 'concured_node_dev',
     mongodb_host : "localhost"
 };
