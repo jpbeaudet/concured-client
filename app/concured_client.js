@@ -26,7 +26,7 @@
 	var _test = (function test(){
 		if ($('#test').length) {
 			console.log("started")
-		$.getJSON( "http://localhost:3000/api", function( data ) {
+		$.getJSON( "http://app.concured.com:3000/api", function( data ) {
 			if (data.success){
 				var _cb = function(){
 					console.log("_cb")
@@ -51,7 +51,7 @@
 	var _sites = (function sites(){
 		if ($('#sites').length) {
 			console.log("started")
-		$.getJSON( "http://localhost:3000/api", function( data ) {
+		$.getJSON( "http://app.concured.com:3000/api", function( data ) {
 			if (data.success){
 				var _cb = function(){
 					console.log("_cb")
@@ -86,7 +86,7 @@
 	var _dashboard_topics = (function get_dashboard_topics(){
 		if ($('#dashboard_topics').length) {
 			console.log("started")
-		$.getJSON( "http://localhost:3000/api", function( data ) {
+		$.getJSON( "http://app.concured.com:3000/api", function( data ) {
 			if (data.success){
 
 				var urls =[]
@@ -117,7 +117,7 @@
 						var url = urls[x].replace(/\//g, '_');
 						console.log("generate 5 topics for "+JSON.stringify(url))
 						
-						$.getJSON( "http://localhost:3000/api/audit/TopTopicsPerSite/"+ url+"?number=5&order="+x, function(topics ) {
+						$.getJSON( "http://app.concured.com:3000/api/audit/TopTopicsPerSite/"+ url+"?number=5&order="+x, function(topics ) {
 							if(topics.success){
 						       //console.log("generated 5 topics: "+JSON.stringify(topics.TopTopics)+" id: "+topics.id+" order: "+ topics.order)
 								var generate = Dashboard_Topics(topics.TopTopics, topics.id, topics.order, _cb)
@@ -138,7 +138,7 @@
 		if ($('#audit_topics').length) {
 			console.log("started")
 			var url = $('#target').text()
-		$.getJSON( "http://localhost:3000/api/audit/TopTopicsPerSite/"+ url+"?number=10&order=0", function( data ) {
+		$.getJSON( "http://app.concured.com:3000/api/audit/TopTopicsPerSite/"+ url+"?number=10&order=0", function( data ) {
 			if (data.success){
 				var _cb = function(){
 					console.log("_cb")
@@ -183,7 +183,7 @@
 	
 	function audit_topics_details (target, index){
 			// Finally populate selected topic data
-			$.getJSON( "http://localhost:3000/api/audit/TopicDataPerName/"+ target, function( topic ) {
+			$.getJSON( "http://app.concured.com:3000/api/audit/TopicDataPerName/"+ target, function( topic ) {
 				if(topic.success){
 				
 				var _cb = function(){
